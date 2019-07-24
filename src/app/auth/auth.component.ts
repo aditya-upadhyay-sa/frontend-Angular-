@@ -7,7 +7,7 @@ import { first } from 'rxjs/operators';
 import { AlertService } from '../services/alert.service';
 import { UserService } from '../services/user.service';
 
-@Component({templateUrl: 'auth.component.html'})
+@Component({ templateUrl: 'auth.component.html' })
 export class AuthComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
@@ -18,16 +18,16 @@ export class AuthComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private userservice:UserService,
-        private alertService: AlertService) {}
+        private userservice: UserService,
+        private alertService: AlertService) { }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ['', [Validators.email,Validators.required]],
+            email: ['', [Validators.email, Validators.required]],
             password: ['', Validators.required]
         });
 
- 
+
 
 
         // get return url from route parameters or default to '/'
@@ -39,19 +39,38 @@ export class AuthComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
+        this.loading = true;
         // stop here if form is invalid
         if (this.loginForm.invalid) {
+            this.loading=false;
             return;
         }
-        else{
-            const email=this.loginForm.value.email;
-            const password=this.loginForm.value.password;
-            this.userservice.authenticateuser(email,password);
-        
+        else {
+            const email = this.loginForm.value.email;
+            const password = this.loginForm.value.password;
+            this.userservice.authenticateuser(email, password).subscribe((resdata) => {
+            
+
+                if (resdata) {
+                    this.loading=false;
+                    console.log(resdata);
+                    this.router.navigate(['/expense-list'])
+                } else {
+                    this.loading=false;
+                    alert("Login Failed!")
+                }
+
+            }, (err) => {
+                this.loading=false;
+                alert("Login Failed!")
+                console.log(err);
+            }
+
+            );
+
 
         }
-        this.loading = true;
-       
+
+
     }
 }
