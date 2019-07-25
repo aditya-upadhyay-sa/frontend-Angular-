@@ -12,7 +12,8 @@
                       *ngFor="let data of expensedata; let i = index"
                       (click)="onEditexpense(i)"
                     >
-                     <strong>{{ data.expensename }}</strong> ({{ data.amount }} Rs.) <strong>Totalfriends: </strong>{{data.nooffriends}}
+                     <strong>{{ data.expensename }}</strong> ({{ data.amount }} Rs.) <strong>Totalfriends: </strong>{{data.nooffriends}} <strong><em>Perperson: </em></strong>{{perperson[i]}} Rs.
+                     <!--  -->
                     </a>
                   </ul>
                 </div>

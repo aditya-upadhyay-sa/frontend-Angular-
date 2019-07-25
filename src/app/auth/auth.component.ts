@@ -19,7 +19,11 @@ export class AuthComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private userservice: UserService,
-        private alertService: AlertService) { }
+        private alertService: AlertService) {
+                        if(this.userservice.loggedIn()){
+                            this.router.navigate(["/expense-list"])
+                        }    
+         }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -49,11 +53,13 @@ export class AuthComponent implements OnInit {
             const email = this.loginForm.value.email;
             const password = this.loginForm.value.password;
             this.userservice.authenticateuser(email, password).subscribe((resdata) => {
+                
             
 
                 if (resdata) {
                     this.loading=false;
-                    console.log(resdata);
+                    // console.log(resdata);
+                    localStorage.setItem('token',resdata.token)
                     this.router.navigate(['/expense-list'])
                 } else {
                     this.loading=false;

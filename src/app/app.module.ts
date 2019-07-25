@@ -9,22 +9,26 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AlertComponent } from './directives';
-import { AlertService } from './services/alert.service';
+
 import { UserService } from './services/user.service';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import {SignupService} from './services/signup.service';
 
 import { ExpenseEditComponent } from './expense-list/expense-edit/expense-edit.component'
 import { ExpenseListComponent } from './expense-list/expense-list.component';
-import { ErrorInterceptor } from './shared/error.interceptors';
-import { JwtInterceptor } from './shared/jwt.interceptors';
+
+
 import { AuthGuard } from './shared/auth.guard';
+import { TokenInterceptorService } from './services/token.interceptors.service';
+import { FriendListComponent } from './friend-list/friend-list.component';
 
 const appRoutes: Routes=[
  {path:'',component:CarousalComponent},
   {path: 'login',component:AuthComponent},
   {path: 'signup',component:SignupComponent},
-  { path: 'expense-list', component: ExpenseListComponent,canActivate: [AuthGuard] }
+  { path: 'expense-list', component: ExpenseListComponent,canActivate: [AuthGuard] },
+  { path: 'friend-list', component: FriendListComponent,canActivate: [AuthGuard] }
+
   
 ]
 
@@ -37,7 +41,8 @@ const appRoutes: Routes=[
     SignupComponent,
     AlertComponent,
     ExpenseListComponent,
-    ExpenseEditComponent
+    ExpenseEditComponent,
+    FriendListComponent
     
     
   ],
@@ -47,8 +52,11 @@ const appRoutes: Routes=[
   ],
   providers: [UserService,SignupService,[
 
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
 
   ]],
   bootstrap: [AppComponent]

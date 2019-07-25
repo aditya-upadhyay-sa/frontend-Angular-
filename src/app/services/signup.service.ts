@@ -19,7 +19,7 @@ export class SignupService {
 
 
   AddUser(user:User) {
-     return this.http.post('http://localhost:8000/api/addusers', user)
+     return this.http.post<any>('http://localhost:8080/api/addusers', user)
   }
 
 }

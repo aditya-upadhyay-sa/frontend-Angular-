@@ -44,8 +44,14 @@ export class SignupComponent implements OnInit {
                 const lastName=this.registerForm.value.lastName;
                 const email=this.registerForm.value.email;
                 const password=this.registerForm.value.password;
-               this.subscription= this.signupservice.AddUser({firstName,lastName,email,password}).subscribe((r) =>{
-                console.log(r)
+                this.signupservice.AddUser({firstName,lastName,email,password}).subscribe((r) =>{
+
+                if(r){
+                    console.log(r)
+                    localStorage.setItem('token',r.token)
+
+                }
+                
                 
               }
                 

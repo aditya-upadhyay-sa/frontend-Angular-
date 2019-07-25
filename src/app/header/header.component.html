@@ -11,23 +11,27 @@
         </li>
        
         
-        <li class="nav-item" *ngIf="!currentuser">
+        <li class="nav-item" *ngIf="!userservice.loggedIn()">
             <a class="nav-link"  routerLink="login" >Log In</a>
         </li>
-        <li class="nav-item" *ngIf="!currentuser">
+        <li class="nav-item" *ngIf="!userservice.loggedIn()">
             <a class="nav-link" routerLink="signup">Sign Up</a>
         </li>
         
-        <li class="nav-item" *ngIf="currentuser">
+        <li class="nav-item" *ngIf="userservice.loggedIn()">
             <a class="nav-link"  routerLink="/" (click)="logout()">Logout</a>
         </li>
        
            
-        <li class="nav-item" *ngIf="currentuser">
-            <a class="nav-link"  routerLink="">Friends</a>
+        <li class="nav-item" *ngIf="userservice.loggedIn()">
+            <a class="nav-link"  routerLink="/friend-list">Friends</a>
         </li>
-          
-        <li class="nav-item" *ngIf="currentuser">
+
+        <li class="nav-item" *ngIf="userservice.loggedIn()">
+          <a class="nav-link"  routerLink="/expense-list">Manage Expense</a>
+        </li>
+      
+        <li class="nav-item" *ngIf="iscurrentuser">
           <p>Welcome {{currentuser}}</p>
         </li>
 

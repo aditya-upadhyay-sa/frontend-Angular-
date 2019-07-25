@@ -50,4 +50,5 @@ export class ExpenseListService {
     this.expensedata.splice(index, 1);
     this.expenseChanged.next(this.expensedata.slice());
   }
+
 }
