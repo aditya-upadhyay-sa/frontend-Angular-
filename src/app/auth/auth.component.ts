@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
         private userservice: UserService,
         private alertService: AlertService) {
                         if(this.userservice.loggedIn()){
-                            this.router.navigate(["/expense-list"])
+                            this.router.navigate(["/expense"])
                         }    
          }
 
@@ -60,7 +60,7 @@ export class AuthComponent implements OnInit {
                     this.loading=false;
                     // console.log(resdata);
                     localStorage.setItem('token',resdata.token)
-                    this.router.navigate(['/expense-list'])
+                    this.router.navigate(['/expense'])
                 } else {
                     this.loading=false;
                     alert("Login Failed!")

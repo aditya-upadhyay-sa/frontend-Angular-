@@ -14,20 +14,31 @@ import { UserService } from './services/user.service';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import {SignupService} from './services/signup.service';
 
-import { ExpenseEditComponent } from './expense-list/expense-edit/expense-edit.component'
-import { ExpenseListComponent } from './expense-list/expense-list.component';
 
 
 import { AuthGuard } from './shared/auth.guard';
+
+import { ExpenseComponent } from './expense/expense.component';
+import { ExpenseListComponent } from './expense/expense-list/expense-list.component';
+import { FriendListComponent } from './expense/friend-list/friend-list.component';
+import { ExpenseEditComponent } from './expense/expense-list/expense-edit/expense-edit.component';
 import { TokenInterceptorService } from './services/token.interceptors.service';
-import { FriendListComponent } from './friend-list/friend-list.component';
 
 const appRoutes: Routes=[
  {path:'',component:CarousalComponent},
   {path: 'login',component:AuthComponent},
   {path: 'signup',component:SignupComponent},
-  { path: 'expense-list', component: ExpenseListComponent,canActivate: [AuthGuard] },
-  { path: 'friend-list', component: FriendListComponent,canActivate: [AuthGuard] }
+  {path: 'expense',component:ExpenseComponent,
+      children:[
+
+        {path: 'expense-list',component:ExpenseListComponent},
+        { path: 'friend-list', component: FriendListComponent }
+
+
+      ],canActivate: [AuthGuard] 
+
+}
+  
 
   
 ]
@@ -40,9 +51,10 @@ const appRoutes: Routes=[
     AuthComponent,
     SignupComponent,
     AlertComponent,
+    ExpenseComponent,
     ExpenseListComponent,
     ExpenseEditComponent,
-    FriendListComponent
+   FriendListComponent,
     
     
   ],
@@ -50,15 +62,12 @@ const appRoutes: Routes=[
     BrowserModule,NgbModule,
     RouterModule.forRoot(appRoutes),ReactiveFormsModule,HttpClientModule,FormsModule
   ],
-  providers: [UserService,SignupService,[
-
+  providers: [UserService,SignupService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
-
-  ]],
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

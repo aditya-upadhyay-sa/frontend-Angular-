@@ -16,6 +16,7 @@ export class ExpenseEditComponent implements OnInit {
   subscription: Subscription;
   editMode = false;
   editeddataIndex: number;
+  checkforbtn=true;
   editeddata:ExpenseData ;
   constructor(private expenseservice:ExpenseListService) { }
 
@@ -48,6 +49,10 @@ export class ExpenseEditComponent implements OnInit {
     }
     this.editMode = false;
     form.reset();
+  }
+
+  isadd(){
+      this.checkforbtn=false
   }
 
   onClear() {

@@ -28,7 +28,7 @@
               pattern="^[1-9]+[0-9]*$"
             >
           </div>
-          <div class="col-sm-2 form-group">
+          <!-- <div class="col-sm-2 form-group">
             <label for="nofriends">No of friends</label>
             <input
               type="number"
@@ -39,6 +39,10 @@
               required
               pattern="^[1-9]+[0-9]*$"
             >
+          </div> -->
+          <div class="col-sm-2 " *ngIf="checkforbtn" style="margin-top: 7px">
+              <label for="addfriend"></label>
+              <a class="btn btn-success" (click)="isadd()" routerLink="friend-list">Addfriends</a>
           </div>
         </div>
         <div class="row" style="padding-left:15px">

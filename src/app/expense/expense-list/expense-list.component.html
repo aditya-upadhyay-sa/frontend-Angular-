@@ -1,0 +1,48 @@
+<div class="container" style="padding-top: 30px">
+    <div class="jumbotron">
+
+        <div class="row">
+                <div class="col-xs-10">
+                  <app-expense-edit></app-expense-edit>
+                  <hr>
+                  <ul class="list-group">
+                    <a
+                      class="list-group-item"
+                      style="cursor: pointer"
+                      *ngFor="let name of friendlist; let i of index"
+                      (click)="onEditexpense(i)"
+                    >
+                     <strong>{{name}}</strong> : {{amountperperson}} Rs.
+                    </a>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+</div>
+
+<!-- <div class="container" style="padding-top: 30px">
+    <div class="jumbotron">
+
+        <div class="row">
+                <div class="col-xs-10">
+                  <app-expense-edit></app-expense-edit>
+                  <hr>
+                  <ul class="list-group">
+                    <a
+                      class="list-group-item"
+                      style="cursor: pointer"
+                      *ngFor="let data of expensedata; let i = index"
+                      (click)="onEditexpense(i)"
+                    >
+                      <strong>{{ data.expensename }}</strong> ({{ data.amount }} Rs.) <strong>Totalfriends: </strong>{{data.nooffriends}} <strong><em>Perperson: </em></strong>{{perperson[i]}} Rs. 
+                      
+                    </a>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+</div> -->
+
+   

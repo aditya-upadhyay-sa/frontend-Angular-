@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ExpenseData } from '../shared/models/expensedata.model';
+
 import { Subject } from 'rxjs';
+import { ExpenseData } from 'src/app/shared/models/expensedata.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,12 @@ export class ExpenseListService {
  
   expenseChanged = new Subject<ExpenseData[]>();
   startedEditing = new Subject<number>();
-
+  
+  public friendlist:string[]=[]
+  friendlistchanged=new Subject<string[]>();
   private expensedata: ExpenseData[] = [
-    new ExpenseData('party', 100,5),
-    new ExpenseData('tour', 1000,10),
+    // new ExpenseData('party', 100,5),
+    // new ExpenseData('tour', 1000,10),
   ];
 
   constructor() { }
@@ -49,6 +52,13 @@ export class ExpenseListService {
   deleteexpense(index: number) {
     this.expensedata.splice(index, 1);
     this.expenseChanged.next(this.expensedata.slice());
+  }
+
+  addfriendtolist(name:string){
+    this.friendlist.push(name);
+    
+    this.friendlistchanged.next(this.friendlist.slice())
+
   }
 
 }

@@ -1,0 +1,18 @@
+<h1>Please add friends from below!</h1>
+
+<ul class="list-group" *ngFor="let name of firstname">
+                <li 
+                  class="list-group-item"
+                  style="cursor: pointer"
+                >
+                {{name}} 
+                <button style="margin-left:100px" (click)="onaddtolist(name)" class="btn btn-success btn-sm">AddTo List</button> 
+                 
+                
+
+                </li>
+                
+ </ul>
+ 
+
+

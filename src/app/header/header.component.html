@@ -23,12 +23,12 @@
         </li>
        
            
-        <li class="nav-item" *ngIf="userservice.loggedIn()">
+        <!-- <li class="nav-item" *ngIf="userservice.loggedIn()">
             <a class="nav-link"  routerLink="/friend-list">Friends</a>
-        </li>
+        </li> -->
 
         <li class="nav-item" *ngIf="userservice.loggedIn()">
-          <a class="nav-link"  routerLink="/expense-list">Manage Expense</a>
+          <a class="nav-link"  routerLink="/expense">Manage Expense</a>
         </li>
       
         <li class="nav-item" *ngIf="iscurrentuser">
